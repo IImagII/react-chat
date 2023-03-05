@@ -22,7 +22,7 @@ function App() {
       socket.emit('ROOM:JOIN', obj)
       //делаем запрос get чтобы получить данные о том что сейчас произошло в комнате и отобразить это новому пользователю
       const { data } = await axios.get(
-         `http://localhost:3002/rooms/${obj.room}`
+         `http://server-chat-production.up.railway.app/rooms/${obj.room}`
       )
       //ДЛя получения актуалных сообщений даже когда вышел все сообщения сохраняются
       dispatch({ type: 'SET_DATA', payload: data })
