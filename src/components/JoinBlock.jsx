@@ -16,7 +16,7 @@ export const JoinBlock = ({ onLogin }) => {
          userName,
       }
       setsLoading(true)
-      await axios.post('http://localhost:3002/rooms', obj)
+      await axios.post('http://server-chat-production.up.railway.app/rooms', obj)
       onLogin(obj)
    }
 
