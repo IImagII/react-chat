@@ -21,6 +21,7 @@ function Chat({ users, messages, room, userName, addMessage }) {
    useEffect(() => {
       messagesRef.current.scrollTo(0, 99999)
    }, [messages])
+
    return (
       <div className='chat'>
          <div className='chat-users'>

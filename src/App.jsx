@@ -1,7 +1,7 @@
 import './index.css'
 import { JoinBlock } from './components/JoinBlock'
 import reducer from './reducer.js'
-import { useCallback, useEffect, useReducer } from 'react'
+import { useEffect, useReducer } from 'react'
 import socket from './socket'
 import Chat from './components/Chat'
 import axios from 'axios'
@@ -14,9 +14,9 @@ function App() {
       users: [], // это те пользователи коотрые находятьс в комнате
       messages: [], // это сообещня коотрые написаны
    })
-   const x = 0
+
    //делаем функцию для смены нашего состоняи авторизации (obj мы передаем из JoinBlock.jsx)
-   const onLogin = async obj => {
+   async function onLogin(obj) {
       dispatch({ type: 'IS_AUTH', payload: obj })
       // подключаемся к комнате  через сокет
       socket.emit('ROOM:JOIN', obj)
@@ -24,8 +24,8 @@ function App() {
       const { data } = await axios.get(
          `http://localhost:3002/rooms/${obj.room}`
       )
-      //передаем те даннеы который получили
-      setUsers(data.users)
+      //ДЛя получения актуалных сообщений даже когда вышел все сообщения сохраняются
+      dispatch({ type: 'SET_DATA', payload: data })
    }
 
    //создаем для рефакторинга кода чтобы не писать два раза в полседующем useEffcet()
@@ -49,7 +49,7 @@ function App() {
       //сокет добавления новых сообщений
       socket.on('ROOM:NEW_MESSAGE', addMessage)
    }, [])
-   window.socket = socket
+
    return (
       <div className='wrapper'>
          {/* соответсвенно показываем или нет наш чат в зависимости от авторизации */}
