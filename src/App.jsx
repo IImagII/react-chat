@@ -1,7 +1,7 @@
 import './index.css'
 import { JoinBlock } from './components/JoinBlock'
 import reducer from './reducer.js'
-import { useEffect, useReducer } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
 import socket from './socket'
 import Chat from './components/Chat'
 import axios from 'axios'
@@ -14,7 +14,7 @@ function App() {
       users: [], // это те пользователи коотрые находятьс в комнате
       messages: [], // это сообещня коотрые написаны
    })
-   console.log('messages :>> ', state.messages)
+   const x = 0
    //делаем функцию для смены нашего состоняи авторизации (obj мы передаем из JoinBlock.jsx)
    const onLogin = async obj => {
       dispatch({ type: 'IS_AUTH', payload: obj })

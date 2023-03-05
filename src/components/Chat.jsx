@@ -3,7 +3,7 @@ import socket from '../socket'
 
 function Chat({ users, messages, room, userName, addMessage }) {
    const [messageValue, setMessageValue] = useState('') // тут состояние коотрое передает ваши сообщения что вы пишете
-   const messagesRef = useRef()
+   const messagesRef = useRef(null)
 
    //функция по отправки сообщений на сервер через сокеты
    const onSendMessage = () => {
@@ -13,7 +13,8 @@ function Chat({ users, messages, room, userName, addMessage }) {
          userName, // передаем кто пишет сообщение
          text: messageValue, // тут формируем наше сообщенние
       })
-      addMessage({ userName, text: messageValue }) // это длятого чтобы самому можно было отправлять сообщение
+      addMessage({ userName, text: messageValue }) // это для того чтобы самому можно было отправлять сообщение
+      setMessageValue('')
    }
 
    //это пишем для того чтобы чат двигался вниз когда пишуться сообщения
